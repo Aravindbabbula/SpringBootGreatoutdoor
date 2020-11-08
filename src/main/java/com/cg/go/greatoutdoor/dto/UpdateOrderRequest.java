@@ -1,4 +1,4 @@
-package com.cg.go.greatoutdoor.order.dto;
+package com.cg.go.greatoutdoor.dto;
 
 import java.time.LocalDate;
 

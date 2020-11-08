@@ -1,10 +1,10 @@
-package com.cg.go.greatoutdoor.order.service;
+package com.cg.go.greatoutdoor.service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import com.cg.go.greatoutdoor.order.entity.OrderEntity;
+import com.cg.go.greatoutdoor.entity.OrderEntity;
 public interface IOrderService {
 
 	public List<OrderEntity> findAllOrders();

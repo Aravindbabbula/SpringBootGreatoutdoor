@@ -1,4 +1,4 @@
-package com.cg.go.greatoutdoor.order.exception;
+package com.cg.go.greatoutdoor.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.cg.go.greatoutdoor.order.exception.OrderException;
-import com.cg.go.greatoutdoor.order.exception.OrderExceptionHandler;
+import com.cg.go.greatoutdoor.exception.OrderException;
+import com.cg.go.greatoutdoor.exception.OrderExceptionHandler;
 
 @RestControllerAdvice
 public class OrderExceptionHandler {
