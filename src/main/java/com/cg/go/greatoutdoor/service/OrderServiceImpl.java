@@ -23,25 +23,34 @@ import com.cg.go.greatoutdoor.exception.OrderException;
 
 public class OrderServiceImpl implements IOrderService {
 	private static final Logger Log = LoggerFactory.getLogger(OrderServiceImpl.class);
-	
+
 	 @Autowired
 	    IOrderRepository OrderRepository;
 	 // Find the orders based on the user Id in the orders table
 	 @Override
 	public Optional<OrderEntity>findOrdersByUserId(Integer userId){
-        Optional<OrderEntity> list= OrderRepository.findById(userId);
+		 Optional<OrderEntity> optional=OrderRepository.findById(userId);
+		 if(!optional.isPresent()) {
+			 throw new OrderException("order not found for id="+userId);
+		 }
+		 Optional<OrderEntity> list= OrderRepository.findById(userId);
 		return list;
 	}
+	 
 	 // Find all the required orders in the order table
 	@Override
 	public List<OrderEntity> findAllOrders(){
+		
         List<OrderEntity> list= OrderRepository.findAll();
+        if(list==null || list.size()==0) {
+        	throw new OrderException("orders not found");
+        }
 		return list;
 	}
 	// Add orders using the order entity table
 	@Override
 	public OrderEntity addOrder(OrderEntity orderEntity) {
-		boolean exists=OrderRepository.existsById(orderEntity.getUserId());
+		boolean exists=orderEntity.getUserId()!=null &&OrderRepository.existsById(orderEntity.getUserId());
         if(exists){
             throw new OrderException("Order already exists for id="+orderEntity.getUserId());
         }  
@@ -69,10 +78,10 @@ public class OrderServiceImpl implements IOrderService {
 	// Update DispatchDate and arrivalDate based on orderID in the table 
 	@Override
 	public OrderEntity updateDate(Integer orderId, LocalDate dispatchDate, LocalDate arrivalDate) {
-		/*boolean exists= OrderRepository.existsById(OrderEntity.getOrderId());
+		boolean exists= OrderRepository.existsById(orderId);
         if(!exists){
-            throw new OrderException("Order does not exists for id="+OrderEntity.getOrderId());
-        }*/
+            throw new OrderException("Order does not exists for id="+orderId);
+        }
 		Optional<OrderEntity> optional=OrderRepository.findById(orderId);
 		OrderEntity order=optional.get();
 		OrderRepository.save(order);
