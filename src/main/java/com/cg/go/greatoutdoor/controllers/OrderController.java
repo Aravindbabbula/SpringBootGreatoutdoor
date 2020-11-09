@@ -19,6 +19,8 @@ import com.cg.go.greatoutdoor.dto.CreateOrderRequest;
 import com.cg.go.greatoutdoor.dto.OrderDetails;
 import com.cg.go.greatoutdoor.dto.UpdateOrderRequest;
 import com.cg.go.greatoutdoor.entity.OrderEntity;
+import com.cg.go.greatoutdoor.product.dto.ProductDetails;
+import com.cg.go.greatoutdoor.product.entity.ProductEntity;
 import com.cg.go.greatoutdoor.service.IOrderService;
 
 
@@ -41,7 +43,7 @@ public class OrderController {
     	OrderEntity order = new OrderEntity(requestData.getUserId(),requestData.getTotalPrice(),
         		requestData.getTotalQuantity(),requestData.getDispatchDate(),requestData.getDeliveryDate());
     	order = orderService.addOrder(order);
-       // OrderDetails details = toDetails(order);
+        //OrderDetails details = toDetails(order);
         return order;
     }
  
@@ -82,4 +84,5 @@ public class OrderController {
 		orderService.deleteAllOrders();
 		return "all orders deleted";
 	}
+
 }
